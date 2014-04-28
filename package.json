@@ -1,0 +1,16 @@
+{
+  "name": "ReactiveReact",
+  "version": "0.0.0",
+  "description": "Reactive Web UI Prototype",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "holsee",
+  "license": "MIT",
+  "devDependencies": {
+    "grunt-contrib-watch": "~0.6.1",
+    "grunt": "~0.4.4",
+    "grunt-react": "~0.8.2"
+  }
+}
