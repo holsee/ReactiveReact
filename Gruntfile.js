@@ -18,7 +18,7 @@ module.exports = function(grunt) {
  
     watch: {
       react: {
-        files: 'public/js/**/*.jsx',
+        files: 'src/views/**/*.jsx',
         tasks: ['react']
       }
     }
