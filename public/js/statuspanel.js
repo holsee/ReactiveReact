@@ -3,7 +3,7 @@
 //
 // Components
 
-var StatusPanel = React.createClass({displayName: 'StatusPanel',
+var PriceBoard = React.createClass({displayName: 'PriceBoard',
   getInitialState: function(){
     return {
       status: 'up',
@@ -11,29 +11,34 @@ var StatusPanel = React.createClass({displayName: 'StatusPanel',
     };
   },
   onData: function(data){
-    var status = this.state.price < data.price ? 'up' : 'down';
-    this.setState({status: status, price: data.price});
+    this.setState({
+      status: (this.state.price < data.price ? 'up' : 'down'), 
+      price: data.price
+    });
   },
   render: function() {
+    console.log(this.state);
     return (
-      React.DOM.div( {className:"statusPanel"}, 
-        Status( {status: this.state.status,  price: this.state.price } )
+      React.DOM.div( {className: 'status-' + this.state.status }, 
+        Price( {value:this.state.price}),React.DOM.br(null),
+        Price( {value:this.state.price}),
+        Price( {value:this.state.price})
       )
     );
   }
 });
 
-var Status = React.createClass({displayName: 'Status',
+var Price = React.createClass({displayName: 'Price',
   render: function() {
     return (
-      React.DOM.div( {className: 'status-' + this.props.status } , this.props.price)
+      React.DOM.div(null, this.props.value)
     );
   }
 });
 
-var statusPanel = StatusPanel();
+var priceBoard = PriceBoard();
 React.renderComponent(
-  statusPanel,
+  priceBoard,
   document.getElementById('content')
 );
 
@@ -41,13 +46,13 @@ React.renderComponent(
 // Streams
 
 // Initially has value open...
-var subject = new Rx.BehaviorSubject();
+var subject = new Rx.Subject();
 
 var source = subject;
 var subscription = source.subscribe(
   function (x) {
     console.log('Subject States:', x);
-    statusPanel.onData({ price: x });
+    priceBoard.onData({ price: x });
   },
   function (err) {
     console.log('Error: ', err);   
