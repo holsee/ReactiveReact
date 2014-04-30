@@ -1,17 +1,11 @@
-.status-open {
-  background-color: blue;
-  height: 10px;
-  width: 10px;
-}
-
-.status-matched {
-  background-color: orange;
-  height: 10px;
-  width: 10px;
-}
-
-.status-submitted {
+.status-up {
   background-color: green;
-  height: 10px;
-  width: 10px;
+  height: 100px;
+  width: 100px;
+}
+
+.status-down {
+  background-color: red;
+  height: 100px;
+  width: 100px;
 }
