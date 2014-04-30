@@ -1,25 +1,14 @@
 <!DOCTYPE html>
 <html>
+<head>
+<link rel="stylesheet" type="text/css" href="public/css/status.css" media="screen"/>
+
 <body>
-<div id="content"/>
+
+<div id="content"></div>
+
 <script src="bower_components/react/react.js"></script>
 <script src="bower_components/rxjs/rx.js"></script>
 <script src="bower_components/rxjs/rx.time.js"></script>
+<script src="bower_components/rxjs/rx.binding.js"></script>
 <script type="text/javascript" src="public/js/statuspanel.js"></script>
-<!--<script>
-var source = Rx.Observable
-    .interval(500 /* ms */)
-    .timeInterval()
-    .take(3);
-
-var subscription = source.subscribe(
-    function (x) {
-        console.log('Next: ', x);
-    },
-    function (err) {
-        console.log('Error: ' , err);   
-    },
-    function () {
-        console.log('Completed');   
-    });
-</script>-->

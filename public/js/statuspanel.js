@@ -3,35 +3,36 @@ var StatusPanel = React.createClass({displayName: 'StatusPanel',
   render: function() {
     return (
       React.DOM.div( {className:"statusPanel"}, 
-        this.props.data
+        Status( {status: this.props.status } )
       )
     );
   }
 });
 
-React.renderComponent(
-  StatusPanel( {data:"hai"}),
-  document.getElementById('content')
-);
-
-var source = Rx.Observable
-    .interval(500 /* ms */)
-    .timeInterval()
-    .take(10);
-
-var subscription = source.subscribe(
-function (x) {
-  React.renderComponent(
-    StatusPanel( {data:x}),
-    document.getElementById('content')
-  );
-},
-function (err) {
-    console.log('Error: ' , err);   
-},
-function () {
-  React.renderComponent(
-    StatusPanel( {data:"FIN"}),
-    document.getElementById('content')
-  );
+var Status = React.createClass({displayName: 'Status',
+  render: function() {
+    return (
+      React.DOM.div( {className: 'status-' + this.props.status } )
+    );
+  }
 });
+
+var subject = new Rx.Subject();
+
+
+var source = subject;
+
+var subscription = subject.subscribe(
+  function (x) {
+    console.log('Subject States:', x);
+    React.renderComponent(
+      StatusPanel( { status: x } ),
+      document.getElementById('content')
+    );
+  },
+  function (err) {
+    console.log('Error: ', err);   
+  },
+  function () {
+    console.log('Completed');   
+  });
