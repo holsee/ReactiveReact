@@ -4,9 +4,24 @@
 // Components
 
 var PriceBoard = React.createClass({
+  componentWillMount: function () {
+    var _this = this;
+    this.props.stream.subscribe(
+      function (x) {
+        _this.onData({ price: x });
+      },
+      function (err) {
+        console.log('Error: ', err); 
+        _this.setState({ status: 'err' });
+      },
+      function () {
+        console.log('Completed');
+        _this.setState({ status: 'closed' });
+      });
+  },
   getInitialState: function(){
     return {
-      status: 'up',
+      status: 'closed',
       price: 0.0
     };
   },
@@ -17,11 +32,9 @@ var PriceBoard = React.createClass({
     });
   },
   render: function() {
-    console.log(this.state);
+    //console.log(this.state);
     return (
       <div className={ 'status-' + this.state.status }>
-        <Price value={this.state.price}/><br/>
-        <Price value={this.state.price}/>
         <Price value={this.state.price}/>
       </div>
     );
@@ -35,32 +48,3 @@ var Price = React.createClass({
     );
   }
 });
-
-var priceBoard = PriceBoard();
-React.renderComponent(
-  priceBoard,
-  document.getElementById('content')
-);
-
-//
-// Streams
-
-// Initially has value open...
-var subject = new Rx.Subject();
-
-var source = subject;
-var subscription = source.subscribe(
-  function (x) {
-    console.log('Subject States:', x);
-    priceBoard.onData({ price: x });
-  },
-  function (err) {
-    console.log('Error: ', err);   
-  },
-  function () {
-    console.log('Completed');   
-  });
-
-// ... later this is changed to matched.
-//subject.onNext('matched'); 
-//subject.onCompleted();

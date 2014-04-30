@@ -6,9 +6,46 @@
 <body>
 
 <div id="content"></div>
+<div id="mo-content"></div>
+
 
 <script src="bower_components/react/react.js"></script>
 <script src="bower_components/rxjs/rx.js"></script>
 <script src="bower_components/rxjs/rx.time.js"></script>
 <script src="bower_components/rxjs/rx.binding.js"></script>
-<script type="text/javascript" src="public/js/statuspanel.js"></script>
+<script src="public/js/statuspanel.js"></script>
+<script type="text/javascript">
+
+// Returns a random number between min and max
+function getRandomArbitrary(min, max) {
+  return Math.random() * (max - min) + min;
+}
+
+function nextTick(x) {
+  return getRandomArbitrary(200, 100).toFixed(4);
+}
+
+var source = Rx.Observable
+  .interval(100)
+  .take(100)
+  .map(nextTick);
+
+React.renderComponent(
+  PriceBoard({ stream: source }),
+  document.getElementById('content')
+);
+
+// Same source stream, manipulating the value 
+var newSource = source
+  .map(function(x){
+    // if(x > 150)
+    //   throw 'oh noes';
+    return Math.round(x);
+  });
+
+React.renderComponent(
+  PriceBoard({ stream: newSource }),
+  document.getElementById('mo-content')
+);
+
+</script>

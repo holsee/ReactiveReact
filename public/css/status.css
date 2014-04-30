@@ -3,6 +3,9 @@
   color: white;
   height: 100px;
   width: 100px;
+  text-align:center;
+  display: table-cell;
+  vertical-align: middle;
 }
 
 .status-down {
@@ -10,4 +13,27 @@
   foreground-color: black;
   height: 100px;
   width: 100px;
+  text-align:center;
+  display: table-cell;
+  vertical-align: middle;
+}
+
+.status-closed {
+  background-color: orange;
+  foreground-color: black;
+  height: 100px;
+  width: 100px;
+  text-align:center;
+  display: table-cell;
+  vertical-align: middle;
+}
+
+.status-err {
+  background-color: pink;
+  foreground-color: black;
+  height: 100px;
+  width: 100px;
+  text-align:center;
+  display: table-cell;
+  vertical-align: middle;
 }
