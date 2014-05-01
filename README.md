@@ -9,10 +9,11 @@ I think I am onto something here...
 
 ```
 npm install
-bower install
+bower install 
 ```
 
 open ./index.html
+
 
 ### Edit
 
@@ -20,3 +21,5 @@ compile jsx
 ```
 grunt watch
 ```
+
+Demo: http://holsee.github.io/ReactiveReact/
